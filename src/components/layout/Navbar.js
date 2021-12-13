@@ -79,12 +79,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
   }
 
   const handleLogin = () => {
-    const popupWindow = window.open(
-      process.env.REACT_APP_API_URL + "/auth/steam",
-      "_blank",
-      "width=800, height=600",
-    );
-    if (window.focus) popupWindow.focus();
+    localStorage.setItem('auth', true)
   }
 
   const authLinks = (
@@ -101,13 +96,13 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
               fontFamily: 'Lato',
             }}
           >
-            {userInfo ? userInfo.name : ''}
+            Simon
           </Typography>
           <CustomPersonalColor onClick={handleOpenWithdraw}>
             Withdraw
           </CustomPersonalColor>
         </Stack>
-        <Stack>
+        {/* <Stack>
           <img src={userInfo ? userInfo.avatar : ''} alt="avatar" style={{
             width: '34px',
             height: '34px',
@@ -117,7 +112,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
             background: 'linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
             borderImageSlice: 1
           }} />
-        </Stack>
+        </Stack> */}
         <Stack>
           <Button
             variant="contained"
@@ -190,7 +185,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
         }}
         onClick={handleLogin}
       >
-        Sign in via steam
+        Sign in via NFT
       </Button>
     </ul>
   )
@@ -221,7 +216,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                   letterSpacing: '0.02em'
                 }}
               >
-                DICED
+                SIMON
                 <span
                   style={{
                     color: '#10E57A',
@@ -231,7 +226,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                     fontFamily: 'Oxanium',
                   }}
                 >
-                  .GG
+                  .P
                 </span>
               </Typography>
             </Link>

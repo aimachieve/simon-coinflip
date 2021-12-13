@@ -14,14 +14,13 @@
 }
 
 body {
-  /* background-image: url("./img/background.jpeg"); */
+  background-image: url("./img/background.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   font-family: "Raleway", sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   /* background-color: #fff; */
-  background: #101624;
 
   color: #333;
 }
@@ -712,7 +711,7 @@ tr td {
   justify-content: center;
 }
 
-.new_flip_btn::before {
+/* .new_flip_btn::before {
   content: "";
   background-image: url("./img/btn_bg.png");
   background-size: cover;
@@ -722,7 +721,7 @@ tr td {
   bottom: 0px;
   left: 0px;
   opacity: 0.1;
-}
+} */
 
 .ban_btn::before {
   content: "";

@@ -54,7 +54,7 @@ const Footer = () => {
                   letterSpacing: '0.02em'
                 }}
               >
-                DICED
+                SIMON
                 <span
                   style={{
                     color: '#58627A',
@@ -64,7 +64,7 @@ const Footer = () => {
                     fontFamily: 'Oxanium',
                   }}
                 >
-                  .GG
+                  .P
                 </span>
               </Typography>
             </Link>
@@ -117,7 +117,7 @@ const Footer = () => {
                 fontSize: '12px',
                 lineHeight: '16px',
               }}>
-                Copyright © 2021 Diced.gg
+                Copyright © 2021 Simon.p
               </Button>
             </Stack>
           </Stack >
