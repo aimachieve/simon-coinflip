@@ -41,6 +41,7 @@ export const setIsAuthenticated = (user) => async dispatch => {
 		payload: jsonUser
 	});
 };
-// Logout
+
+// LogIn
 export const login = () => ({ type: LOGOUT });
 

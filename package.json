@@ -1,13 +1,13 @@
 {
-  "name": "diced.gg",
-  "version": "1.0.0",
+  "name": "degencasino-coinflip",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
-    "@mui/icons-material": "^5.2.0",
+    "@mui/icons-material": "^5.1.0",
     "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.1.0",
     "@mui/styles": "^5.1.0",
@@ -21,12 +21,10 @@
     "jquery": "^3.6.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "^0.9.5",
+    "react-scripts": "^5.0.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "web-vitals": "^1.0.1",
@@ -36,8 +34,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -57,5 +54,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://3.136.116.197:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "@types/web3": "^1.2.2"
+  }
 }

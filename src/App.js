@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import './App.css'
+
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Flip from './components/games/Flip/index.js'
-import Admin from './components/games/Admin/index.js';
 import NotFound from './components/layout/NotFound';
+
 import { LOGOUT } from './actions/types'
 
 // Redux
@@ -34,7 +36,6 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Flip} />
-            <Route exact path="/admin" component={Admin} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

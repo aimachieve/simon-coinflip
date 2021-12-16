@@ -1,24 +1,31 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@material-ui/core';
+import React from 'react';
+import PropTypes from 'prop-types'
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import { Stack, TextField } from '@mui/material'
+import { makeStyles } from '@material-ui/core'
+
+import {
+  Typography,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Stack,
+  Button,
+  TextField
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Icons
 import CloseIcon from '@mui/icons-material/Close'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 function Winner(props) {
   const { onClose, open } = props;
+
+  // Probably Fair Info
   let hashvalue = "27ys892h9sg2s92s8zg9zhz8gs9zh98zg"
   let secret = "s38s920sh29s"
   let winningTicket = " 32.3928493%"
@@ -34,7 +41,7 @@ function Winner(props) {
   const useStyles = makeStyles({
     root: {
       color: '#8690A7',
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '12px',
@@ -50,10 +57,10 @@ function Winner(props) {
   })
   const classes = useStyles()
 
-
+  // Custom Styled Typography
   const JoinGameColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '14px',
@@ -64,7 +71,20 @@ function Winner(props) {
       cursor: 'pointer'
     }
   })(Typography)
+  const TitleColor = withStyles({
+    root: {
+      fontFamily: 'Helvetica',
+      fontStyle: 'normal',
+      fontWeight: 900,
+      fontSize: '16px',
+      lineHeight: '24px',
+      background: "-webkit-linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent"
+    }
+  })(Typography)
 
+  // Custom Styled BootstrapDialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
       padding: theme.spacing(2),
@@ -104,24 +124,10 @@ function Winner(props) {
       </DialogTitle>
     )
   }
-
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   }
-
-  const TitleColor = withStyles({
-    root: {
-      fontFamily: 'Lato',
-      fontStyle: 'normal',
-      fontWeight: 900,
-      fontSize: '16px',
-      lineHeight: '24px',
-      background: "-webkit-linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent"
-    }
-  })(Typography)
 
   return (
     < BootstrapDialog
@@ -167,12 +173,12 @@ function Winner(props) {
               boxSizing: 'border-box'
             }}>
               <JoinGameColor>
-              + $ 25,008
+                + $ 25,008
               </JoinGameColor>
             </Button>
             <Typography sx={{
               color: "#fff",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 'bold',
               fontSize: '14px',
@@ -182,7 +188,7 @@ function Winner(props) {
             </Typography>
             <Typography sx={{
               color: "#58627A",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 900,
               fontSize: '12px',
@@ -193,27 +199,29 @@ function Winner(props) {
           </Stack>
 
           {/* Winner Side */}
-            <Stack>
-              <img src="/assets/heads.png" alt="winner-side" style={{
-                width: '64px', 
-                height: '64px',
-                borderRadius: '32px',
-                border: '1px solid',
-                borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-                background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-                borderImageSlice: 1,
-                filter: 'drop-shadow(0px 4px 20px rgba(16, 229, 122, 0.15))',
-                }} />
-            </Stack>
+          <Stack>
+            <img src="/assets/heads.png" alt="winner-side" style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '32px',
+              border: '1px solid',
+              borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+              background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+              borderImageSlice: 1,
+              filter: 'drop-shadow(0px 4px 20px rgba(16, 229, 122, 0.15))',
+            }} />
+          </Stack>
 
           {/* Second Player */}
-          <Stack justifyContent="center" alignItems="center" spacing={1} style={{opacity: '0.25'}}>
+          <Stack justifyContent="center" alignItems="center" spacing={1} style={{ opacity: '0.25' }}>
+            {/* Avatar */}
             <img src="/assets/avatar2.png" alt="avatar" style={{
               width: '48px',
               height: '48px',
               borderRadius: '16px',
               border: '1px solid #58627A',
             }} />
+            {/* Side */}
             <img src="/assets/top_tail.png" alt="prefix" style={{
               width: '24px',
               height: '24px',
@@ -222,6 +230,8 @@ function Winner(props) {
               top: '55px',
               left: '340px',
             }} />
+
+            {/* Amount */}
             <Button variant="contained" sx={{
               background: '#1B2437',
               borderRadius: '6px',
@@ -230,20 +240,22 @@ function Winner(props) {
               border: '1px solid #232D43',
               boxSizing: 'border-box'
             }}>
-            <Typography sx={{
-              color: "#fff",
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-              fontWeight: 900,
-              fontSize: '14px',
-              lineHeight: '20px',
-            }}>
-              $ 12,504
-            </Typography>
+              <Typography sx={{
+                color: "#fff",
+                fontFamily: 'Helvetica',
+                fontStyle: 'normal',
+                fontWeight: 900,
+                fontSize: '14px',
+                lineHeight: '20px',
+              }}>
+                $ 12,504
+              </Typography>
             </Button>
+
+            {/* User name */}
             <Typography sx={{
               color: "#fff",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 'bold',
               fontSize: '14px',
@@ -251,9 +263,11 @@ function Winner(props) {
             }}>
               TJStudio @ TJStudio
             </Typography>
+
+            {/* Level */}
             <Typography sx={{
               color: "#58627A",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 900,
               fontSize: '12px',
@@ -263,6 +277,8 @@ function Winner(props) {
             </Typography>
           </Stack>
         </Stack>
+
+        {/* Hash Value */}
         <Stack>
           <TextField
             id="hash-value"

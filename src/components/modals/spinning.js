@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@material-ui/core';
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import { Stack, TextField } from '@mui/material'
+import { makeStyles } from '@material-ui/core';
+
+import {
+  Stack,
+  TextField,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
@@ -21,7 +25,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const useStyles = makeStyles({
   root: {
     color: '#8690A7',
-    fontFamily: 'Lato',
+    fontFamily: 'Helvetica',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '12px',
@@ -36,6 +40,7 @@ const useStyles = makeStyles({
   }
 })
 
+// Custom Bootstrap Dialog
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
@@ -75,15 +80,15 @@ const BootstrapDialogTitle = (props) => {
     </DialogTitle>
   )
 }
-
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 }
 
+// Styled Typography
 const TitleColor = withStyles({
   root: {
-    fontFamily: 'Lato',
+    fontFamily: 'Helvetica',
     fontStyle: 'normal',
     fontWeight: 900,
     fontSize: '16px',
@@ -96,6 +101,8 @@ const TitleColor = withStyles({
 
 function Spinning(props) {
   const { onClose, open, endGame } = props;
+
+  // Proabably fair data
   let hashvalue = "27ys892h9sg2s92s8zg9zhz8gs9zh98zg"
   let secret = "s38s920sh29s"
   let winningTicket = " 32.3928493%"
@@ -104,6 +111,7 @@ function Spinning(props) {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
   const classes = useStyles()
 
+  // States
   const [betType, setBetType] = useState('')
   const [seconds, setSeconds] = React.useState(5);
 
@@ -141,85 +149,107 @@ function Spinning(props) {
     onClose();
   };
 
-
-
   return (
     < BootstrapDialog
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
-      sx={{ width: isDesktop ? '541px' : '350px', margin: 'auto', marginTop: isDesktop ? '-220px' : '100px' }
-      }
+      sx={{
+        width: isDesktop ? '541px' : '350px',
+        margin: 'auto',
+        marginTop: isDesktop ? '-220px' : '100px'
+      }}
     >
       <BootstrapDialogTitle
         id="customized-dialog-title"
         onClose={handleClose}
       >
-        <TitleColor> Coinflip Round </TitleColor>
+        <TitleColor>
+          Coinflip Round
+        </TitleColor>
       </BootstrapDialogTitle>
       <DialogContent >
-        <Stack direction="row" mt={2} justifyContent='space-around'>
+        <Stack
+          direction="row"
+          mt={2}
+          justifyContent='space-around'
+        >
           {/* First Player */}
           <Stack
             justifyContent="center"
             alignItems="center"
             spacing={1}
-            style={{ opacity: betType === 'HEADS' ? '0.25' : '1' }}
+            style={{
+              opacity: betType === 'HEADS' ?
+                '0.25' :
+                '1'
+            }}
           >
-            <img src="/assets/default_avatar.png" alt="avatar" style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '16px',
-              border: '1px solid',
-              borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-              background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-              borderImageSlice: 1
-            }} />
-            <img src="/assets/top_head.png" alt="prefix" style={{
-              width: '24px',
-              height: '24px',
-              borderRadius: '16px',
-              position: 'absolute',
-              top: '55px',
-              left: '110px',
-            }} />
-            <Button variant="contained" sx={{
-              background: '#1B2437',
-              borderRadius: '6px',
-              marginRight: '10px',
-              padding: '8px 32px',
-              border: '1px solid #232D43',
-              boxSizing: 'border-box'
-            }}>
-              <Typography sx={{
-                color: "#fff",
-                fontFamily: 'Lato',
-                fontStyle: 'normal',
-                fontWeight: 900,
-                fontSize: '14px',
-                lineHeight: '20px',
+            <img
+              src="/assets/default_avatar.png"
+              alt="avatar"
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '16px',
+                border: '1px solid',
+                borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                borderImageSlice: 1
+              }} />
+            <img
+              src="/assets/top_head.png"
+              alt="prefix"
+              style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '16px',
+                position: 'absolute',
+                top: '55px',
+                left: '110px',
+              }} />
+            <Button
+              variant="contained"
+              sx={{
+                background: '#1B2437',
+                borderRadius: '6px',
+                marginRight: '10px',
+                padding: '8px 32px',
+                border: '1px solid #232D43',
+                boxSizing: 'border-box'
               }}>
+              <Typography
+                sx={{
+                  color: "#fff",
+                  fontFamily: 'Helvetica',
+                  fontStyle: 'normal',
+                  fontWeight: 900,
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                }}>
                 $ 12,504
               </Typography>
             </Button>
-            <Typography sx={{
-              color: "#fff",
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              lineHeight: '20px',
-            }}>
+            <Typography
+              sx={{
+                color: "#fff",
+                fontFamily: 'Helvetica',
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                lineHeight: '20px',
+              }}>
               Moni @ Dicedgg
             </Typography>
-            <Typography sx={{
-              color: "#58627A",
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-              fontWeight: 900,
-              fontSize: '12px',
-              lineHeight: '16px',
-            }}>
+            <Typography
+              sx={{
+                color: "#58627A",
+                fontFamily: 'Helvetica',
+                fontStyle: 'normal',
+                fontWeight: 900,
+                fontSize: '12px',
+                lineHeight: '16px',
+              }}>
               Level 129
             </Typography>
           </Stack>
@@ -229,34 +259,42 @@ function Spinning(props) {
             {seconds === 0 ?
               <div id="coin" className={betType}>
                 <div className="side-a">
-                  <img src="/assets/heads.png" alt="winner-side" style={{
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '32px',
-                    border: '1px solid',
-                    borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-                    background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-                    borderImageSlice: 1,
-                    filter: 'drop-shadow(0px 4px 20px rgba(16, 229, 122, 0.15))',
-                  }} />
+                  <img
+                    src="/assets/heads.png"
+                    alt="winner-side"
+                    style={{
+                      width: '64px',
+                      height: '64px',
+                      borderRadius: '32px',
+                      border: '1px solid',
+                      borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                      background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                      borderImageSlice: 1,
+                      filter: 'drop-shadow(0px 4px 20px rgba(16, 229, 122, 0.15))',
+                    }}
+                  />
                 </div>
                 <div className="side-b">
-                  <img src="/assets/tails.png" alt="winner-side" style={{
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '32px',
-                    border: '1px solid',
-                    borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-                    background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-                    borderImageSlice: 1,
-                    filter: 'drop-shadow(0px 4px 20px rgba(16, 229, 122, 0.15))',
-                  }} />
+                  <img
+                    src="/assets/tails.png"
+                    alt="winner-side"
+                    style={{
+                      width: '64px',
+                      height: '64px',
+                      borderRadius: '32px',
+                      border: '1px solid',
+                      borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                      background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                      borderImageSlice: 1,
+                      filter: 'drop-shadow(0px 4px 20px rgba(16, 229, 122, 0.15))',
+                    }}
+                  />
                 </div>
               </div> :
               <div style={{
                 color: 'white',
                 textAlign: 'center',
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 900,
                 fontSize: '48px',
@@ -275,61 +313,76 @@ function Spinning(props) {
             spacing={1}
             style={{ opacity: betType === 'TAILS' ? '0.25' : '1' }}
           >
-            <img src="/assets/avatar2.png" alt="avatar" style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '16px',
-              border: '1px solid #58627A',
-            }} />
-            <img src="/assets/top_tail.png" alt="prefix" style={{
-              width: '24px',
-              height: '24px',
-              borderRadius: '16px',
-              position: 'absolute',
-              top: '55px',
-              left: '340px',
-            }} />
-            <Button variant="contained" sx={{
-              background: '#1B2437',
-              borderRadius: '6px',
-              marginRight: '10px',
-              padding: '8px 32px',
-              border: '1px solid #232D43',
-              boxSizing: 'border-box'
-            }}>
-              <Typography sx={{
-                color: "#fff",
-                fontFamily: 'Lato',
-                fontStyle: 'normal',
-                fontWeight: 900,
-                fontSize: '14px',
-                lineHeight: '20px',
+            <img
+              src="/assets/avatar2.png"
+              alt="avatar"
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '16px',
+                border: '1px solid #58627A',
+              }} />
+            <img
+              src="/assets/top_tail.png"
+              alt="prefix"
+              style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '16px',
+                position: 'absolute',
+                top: '55px',
+                left: '340px',
+              }}
+            />
+            <Button
+              variant="contained"
+              sx={{
+                background: '#1B2437',
+                borderRadius: '6px',
+                marginRight: '10px',
+                padding: '8px 32px',
+                border: '1px solid #232D43',
+                boxSizing: 'border-box'
               }}>
+              <Typography
+                sx={{
+                  color: "#fff",
+                  fontFamily: 'Helvetica',
+                  fontStyle: 'normal',
+                  fontWeight: 900,
+                  fontSize: '14px',
+                  lineHeight: '20px',
+                }}>
                 $ 12,504
               </Typography>
             </Button>
-            <Typography sx={{
-              color: "#fff",
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-              fontWeight: 'bold',
-              fontSize: '14px',
-              lineHeight: '20px',
-            }}>
+            <Typography
+              sx={{
+                color: "#fff",
+                fontFamily: 'Helvetica',
+                fontStyle: 'normal',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                lineHeight: '20px',
+              }}>
               TJStudio @ TJStudio
             </Typography>
-            <Typography sx={{
-              color: "#58627A",
-              fontFamily: 'Lato',
-              fontStyle: 'normal',
-              fontWeight: 900,
-              fontSize: '12px',
-              lineHeight: '16px',
-            }}>
+            <Typography
+              sx={{
+                color: "#58627A",
+                fontFamily: 'Helvetica',
+                fontStyle: 'normal',
+                fontWeight: 900,
+                fontSize: '12px',
+                lineHeight: '16px',
+              }}
+            >
               Level 1337
             </Typography>
           </Stack>
         </Stack>
+
+        {/* Hash value */}
         <Stack>
           <TextField
             id="hash-value"

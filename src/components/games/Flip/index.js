@@ -7,8 +7,8 @@ import {
   Grid,
 } from '@mui/material'
 
-import Statistics from './statistics'
-import CoinStats from './coinStats'
+// Components
+import Control from './control'
 import Games from './games'
 
 const Flip = ({ isAuthenticated, login }) => {
@@ -32,34 +32,18 @@ const Flip = ({ isAuthenticated, login }) => {
       <div className="dark-overlay">
         <div className="container">
           {/* statistics */}
-          <Statistics />
+          <Control />
 
-          {/* Main Components */}
           <Grid
             item
-            container
             xs={12}
             md={12}
-            justifyContent="space-between"
-            spacing={3}
-            sx={{marginTop: '32px'}}
+            justifyContent="center"
+            sx={{
+              mt: 5
+            }}
           >
-            <Grid
-              item
-              xs={12}
-              md={8.5}
-              justifyContent="center"
-            >
-              <Games />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={3.5}
-              justifyContent="center"
-            >
-              <CoinStats />
-            </Grid>
+            <Games />
           </Grid>
         </div>
       </div>

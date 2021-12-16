@@ -1,16 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
+
+import {
+  Typography,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Icons
 import CloseIcon from '@mui/icons-material/Close'
 
 function Fairness(props) {
@@ -23,6 +27,7 @@ function Fairness(props) {
     onClose();
   };
 
+  // Customed Bootstrp Dialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
       padding: theme.spacing(2),
@@ -43,7 +48,14 @@ function Fairness(props) {
     const { children, onClose, ...other } = props
 
     return (
-      <DialogTitle sx={{ m: 0, p: 2, borderBottom: 'solid 1px #1B2437' }} {...other}>
+      <DialogTitle
+        sx={{
+          m: 0,
+          p: 2,
+          borderBottom: 'solid 1px #1B2437'
+        }}
+        {...other}
+      >
         {children}
         {onClose ? (
           <IconButton
@@ -62,15 +74,15 @@ function Fairness(props) {
       </DialogTitle>
     )
   }
-
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   }
 
+  // Styled Typography
   const TitleColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '16px',
@@ -97,7 +109,7 @@ function Fairness(props) {
       </BootstrapDialogTitle>
       <DialogContent >
         <Typography sx={{
-          fontFamily: 'Lato',
+          fontFamily: 'Helvetica',
           fontStyle: 'normal',
           fontWeight: 700,
           fontSize: '14px',

@@ -1,22 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@material-ui/core';
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import { Stack, TextField } from '@mui/material'
+import { makeStyles } from '@material-ui/core'
+
+import {
+  Stack,
+  TextField,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Icons
 import CloseIcon from '@mui/icons-material/Close'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
+// Modals
 import JoinFlipModal from './joinFlip'
 
 function JoinGame(props) {
@@ -37,7 +43,7 @@ function JoinGame(props) {
   const useStyles = makeStyles({
     root: {
       color: '#8690A7',
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '12px',
@@ -53,9 +59,12 @@ function JoinGame(props) {
   })
   const classes = useStyles()
 
+  // Custom BootstrapDialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
       padding: theme.spacing(2),
+      overflow: 'hidden',
+      height: 'auto'
     },
     '& .MuiDialogActions-root': {
       padding: theme.spacing(1),
@@ -92,15 +101,15 @@ function JoinGame(props) {
       </DialogTitle>
     )
   }
-
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   }
 
+  // Styled Typography
   const TitleColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '16px',
@@ -116,8 +125,11 @@ function JoinGame(props) {
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
-      sx={{ width: isDesktop ? '541px' : '350px', margin: 'auto', marginTop: isDesktop ? '-220px' : '100px' }
-      }
+      sx={{
+        width: isDesktop ? '541px' : '350px',
+        margin: 'auto',
+        marginTop: isDesktop ? '-220px' : '100px'
+      }}
     >
       <BootstrapDialogTitle
         id="customized-dialog-title"
@@ -126,18 +138,28 @@ function JoinGame(props) {
         <TitleColor> Coinflip Round </TitleColor>
       </BootstrapDialogTitle>
       <DialogContent >
-        <Stack direction="row" mt={2} justifyContent='space-around'>
+        <Stack
+          direction="row"
+          mt={2}
+          justifyContent='space-around'>
           {/* First Player */}
-          <Stack justifyContent="center" alignItems="center" spacing={1}>
-            <img src="/assets/default_avatar.png" alt="avatar" style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '16px',
-              border: '1px solid',
-              borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-              background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
-              borderImageSlice: 1
-            }} />
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            spacing={1}
+          >
+            <img
+              src="/assets/default_avatar.png"
+              alt="avatar"
+              style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '16px',
+                border: '1px solid',
+                borderImage: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                background: 'linear-gradient(0deg, #10B07A 100%, #10E57A 100%)',
+                borderImageSlice: 1
+              }} />
             {
               selected === 'heads' ?
                 <img src="/assets/top_head.png" alt="prefix" style={{
@@ -157,6 +179,7 @@ function JoinGame(props) {
                   left: '130px',
                 }} />
             }
+
             <Button variant="contained" sx={{
               background: '#1B2437',
               borderRadius: '6px',
@@ -167,7 +190,7 @@ function JoinGame(props) {
             }}>
               <Typography sx={{
                 color: "#fff",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '14px',
@@ -176,9 +199,10 @@ function JoinGame(props) {
                 $ 12,504
               </Typography>
             </Button>
+
             <Typography sx={{
               color: "#fff",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 'bold',
               fontSize: '14px',
@@ -186,9 +210,10 @@ function JoinGame(props) {
             }}>
               Moni @ Dicedgg
             </Typography>
+
             <Typography sx={{
               color: "#58627A",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 900,
               fontSize: '12px',
@@ -197,21 +222,30 @@ function JoinGame(props) {
               Level 129
             </Typography>
           </Stack>
+
           {/* Second Player */}
-          <Stack justifyContent="center" alignItems="center" spacing={2}>
-            <Stack justifyContent="center" alignItems="center" style={{
-              width: '48px',
-              height: '48px',
-              background: '#1B2437',
-              borderRadius: '16px',
-              border: '1.5px solid #58627A',
-            }}>
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+          >
+            <Stack
+              justifyContent="center"
+              alignItems="center"
+              style={{
+                width: '48px',
+                height: '48px',
+                background: '#1B2437',
+                borderRadius: '16px',
+                border: '1.5px solid #58627A',
+              }}>
               <img src="/assets/tail-spin.svg" alt="loader" style={{
                 width: '14px',
                 height: '14px',
                 borderImageSlice: 1,
               }} />
             </Stack>
+
             <Button variant="contained" sx={{
               background: '#1B2437',
               borderRadius: '6px',
@@ -222,7 +256,7 @@ function JoinGame(props) {
             }}>
               <Typography sx={{
                 color: "#8690A7",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '14px',
@@ -231,12 +265,16 @@ function JoinGame(props) {
                 ...Waiting
               </Typography>
             </Button>
+
+            {/* Modal */}
             <JoinFlipModal
               closeOldModal={handleClose}
               selected={selected}
             />
           </Stack>
         </Stack>
+
+        {/* Hash value */}
         <Stack>
           <TextField
             id="hash-value"

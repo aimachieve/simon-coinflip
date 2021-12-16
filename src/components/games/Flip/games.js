@@ -54,12 +54,12 @@ const Games = ({ isAuthenticated, test }) => {
 
   const HeaderColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
-      fontSize: '10px',
-      lineHeight: '12px',
-      background: "-webkit-linear-gradient(45deg, #99A7C7 100%, #C1CEEC 100%)",
+      fontSize: '20px',
+      lineHeight: '24px',
+      background: "-webkit-linear-gradient(#ffda6f 15%, #e2a139 56%, #a44e01 80%)",
       WebkitBackgroundClip: "text",
       WebkitTextFillColor: "transparent"
     }
@@ -67,7 +67,7 @@ const Games = ({ isAuthenticated, test }) => {
 
   const JoinGameColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '14px',
@@ -81,7 +81,7 @@ const Games = ({ isAuthenticated, test }) => {
 
   const InProgressColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '14px',
@@ -96,7 +96,7 @@ const Games = ({ isAuthenticated, test }) => {
 
   const WinnerColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '14px',
@@ -111,11 +111,12 @@ const Games = ({ isAuthenticated, test }) => {
   return (
     <>
       {/* Heads */}
-      <Stack direction="row" spacing={5} justifyContent={'space-between'} alignItems="center" sx={{
-        background: '#151C2DBF',
+      <Stack direction="row" justifyContent={'space-between'} alignItems="center" sx={{
+        background: 'rgba(255, 255, 255, 0.4)',
+        borderRadius: '2px',
         height: '34px',
-        marginBottom: '16px',
-        padding: '12px'
+        marginBottom: '10px',
+        padding: '15px'
       }}>
         <HeaderColor> Players </HeaderColor>
         <HeaderColor> Status </HeaderColor>
@@ -126,11 +127,12 @@ const Games = ({ isAuthenticated, test }) => {
       {[...Array(3)].map((_, index) => (
         <Fragment key={index}>
           {/* Join Game */}
-          <Stack direction="row" spacing={5} justifyContent={'space-between'} sx={{
-            background: '#151C2D80',
-            padding: '12px',
+          <Stack direction="row" justifyContent={'space-between'} sx={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            padding: '15px',
             height: '48px',
-            marginBottom: '1px'
+            marginBottom: '2px',
+            borderRadius: '2px'
           }}>
             <Stack direction="row" spacing={2}>
               <Stack >
@@ -147,7 +149,7 @@ const Games = ({ isAuthenticated, test }) => {
               <Stack justifyContent="center">
                 <Typography sx={{
                   color: "#fff",
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   fontStyle: 'normal',
                   fontWeight: 'bold',
                   fontSize: '14px',
@@ -159,7 +161,7 @@ const Games = ({ isAuthenticated, test }) => {
             </Stack>
             <Stack direction="row" justifyContent="flex-end" alignItems="center">
               <JoinGameColor onClick={handleOpenJoin}>
-                Join Game
+                Open Bet
               </JoinGameColor>
               <ArrowForwardIcon sx={{ color: "#10B07A", margin: '0px 10px' }} />
             </Stack>
@@ -167,7 +169,7 @@ const Games = ({ isAuthenticated, test }) => {
               <Stack justifyContent="center">
                 <Typography sx={{
                   color: "#fff",
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   fontStyle: 'normal',
                   fontWeight: 'bold',
                   fontSize: '14px',
@@ -180,11 +182,12 @@ const Games = ({ isAuthenticated, test }) => {
             </Stack>
           </Stack>
           {/* In progress */}
-          <Stack direction="row" spacing={5} justifyContent={'space-between'} sx={{
-            background: '#151C2D80',
-            padding: '12px',
+          <Stack direction="row" justifyContent={'space-between'} sx={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            padding: '15px',
             height: '48px',
-            marginBottom: '1px'
+            marginBottom: '2px',
+            borderRadius: '2px'
           }}>
             <Stack direction="row" spacing={2}>
               <Stack>
@@ -201,7 +204,7 @@ const Games = ({ isAuthenticated, test }) => {
               <Stack justifyContent="center">
                 <Typography sx={{
                   color: "#fff",
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   fontStyle: 'normal',
                   fontWeight: 'bold',
                   fontSize: '14px',
@@ -215,7 +218,7 @@ const Games = ({ isAuthenticated, test }) => {
               gameEnded ?
                 <Stack direction="row" justifyContent="flex-end" alignItems="center">
                   <WinnerColor onClick={handleOpenWinner}>
-                    Winner
+                    Closed Bet
                   </WinnerColor>
                   <img src="/assets/default_avatar.png" alt="avatar" style={{
                     width: '24px',
@@ -239,7 +242,7 @@ const Games = ({ isAuthenticated, test }) => {
               <Stack justifyContent="center">
                 <Typography sx={{
                   color: "#fff",
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   fontStyle: 'normal',
                   fontWeight: 'bold',
                   fontSize: '14px',
@@ -253,11 +256,12 @@ const Games = ({ isAuthenticated, test }) => {
           </Stack>
 
           {/* Winner */}
-          <Stack direction="row" spacing={5} justifyContent={'space-between'} sx={{
-            background: '#151C2D80',
-            padding: '12px',
+          <Stack direction="row" justifyContent={'space-between'} sx={{
+            background: 'rgba(255, 255, 255, 0.2)',
+            padding: '15px',
             height: '48px',
-            marginBottom: '1px'
+            marginBottom: '2px',
+            borderRadius: '2px'
           }}>
             <Stack direction="row" spacing={2}>
               {/* Player */}
@@ -276,7 +280,7 @@ const Games = ({ isAuthenticated, test }) => {
               <Stack justifyContent="center">
                 <Typography sx={{
                   color: "#fff",
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   fontStyle: 'normal',
                   fontWeight: 'bold',
                   fontSize: '14px',
@@ -288,7 +292,7 @@ const Games = ({ isAuthenticated, test }) => {
             </Stack>
             <Stack direction="row" justifyContent="flex-end" alignItems="center">
               <WinnerColor onClick={handleOpenWinner}>
-                Winner
+                Closed Bet
               </WinnerColor>
               <img src="/assets/default_avatar.png" alt="avatar" style={{
                 width: '24px',
@@ -305,7 +309,7 @@ const Games = ({ isAuthenticated, test }) => {
               <Stack justifyContent="center">
                 <Typography sx={{
                   color: "#fff",
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   fontStyle: 'normal',
                   fontWeight: 'bold',
                   fontSize: '14px',

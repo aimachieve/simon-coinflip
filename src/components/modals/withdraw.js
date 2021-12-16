@@ -1,19 +1,24 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import { makeStyles } from '@material-ui/core';
+import React from 'react';
+import PropTypes from 'prop-types'
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import { Stack, TextField } from '@mui/material'
+import { makeStyles } from '@material-ui/core'
+
+import {
+  Stack,
+  TextField,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Icons
 import CloseIcon from '@mui/icons-material/Close'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
@@ -32,13 +37,13 @@ function Withdraw(props) {
   const useStyles = makeStyles({
     root: {
       color: '#fff',
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '14px',
       lineHeight: '20px',
       width: '100%',
-      borderRadius:'4px',
+      borderRadius: '4px',
       "& .MuiDialog-paperScrollPaper": {
         background: 'red',
         borderRadius: '4px'
@@ -47,6 +52,7 @@ function Withdraw(props) {
   })
   const classes = useStyles()
 
+  // Custom styled Bootstrap Dialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
       padding: theme.spacing(2),
@@ -86,15 +92,15 @@ function Withdraw(props) {
       </DialogTitle>
     )
   }
-
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   }
 
+  // Styled Typography
   const TitleColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '16px',
@@ -139,6 +145,8 @@ function Withdraw(props) {
             ETH
           </Button> */}
         </Stack>
+
+        {/* Wallet info */}
         <Stack>
           <TextField
             id="bet-amount"
@@ -157,6 +165,8 @@ function Withdraw(props) {
             }}
           />
         </Stack>
+
+        {/* Description */}
         <Stack direction="row" mt={'16px'} spacing={2}>
           <img src='/assets/QR.png' alt="QR Code" style={{
             background: '#FFFFFF',
@@ -165,14 +175,14 @@ function Withdraw(props) {
             height: '55px'
           }} />
           <Typography sx={{
-            fontFamily: 'Lato',
+            fontFamily: 'Helvetica',
             fontStyle: 'normal',
             fontWeight: 'bold',
             fontSize: '14px',
             lineHeight: '20px',
             color: '#8690A7',
           }}>
-            Users may withdraw deposits only after 77% of any deposit amount. 
+            Users may withdraw deposits only after 77% of any deposit amount.
           </Typography>
         </Stack>
       </DialogContent>

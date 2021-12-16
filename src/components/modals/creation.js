@@ -14,24 +14,14 @@ import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Icons
 import CloseIcon from '@mui/icons-material/Close'
+import AddIcon from '@mui/icons-material/Add'
 
-const CustomGeneralColor = withStyles({
-  root: {
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontWeight: 900,
-    fontSize: '12px',
-    lineHeight: '16px',
-    background: "-webkit-linear-gradient(45deg, #10B07A 100%, #10E57A 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-  }
-})(Typography)
-
+// Custom styled Typographie
 const CustomPersonalColor = withStyles({
   root: {
-    fontFamily: 'Lato',
+    fontFamily: 'Helvetica',
     fontStyle: 'normal',
     fontWeight: 900,
     fontSize: '12px',
@@ -41,12 +31,24 @@ const CustomPersonalColor = withStyles({
     WebkitTextFillColor: "transparent"
   }
 })(Typography)
+const TitleColor = withStyles({
+  root: {
+    fontFamily: 'Helvetica',
+    fontStyle: 'normal',
+    fontWeight: 900,
+    fontSize: '16px',
+    lineHeight: '24px',
+    background: "-webkit-linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent"
+  }
+})(Typography)
 
 // Set TextField's Color
 const useStyles = makeStyles({
   root: {
     color: '#fff',
-    fontFamily: 'Lato',
+    fontFamily: 'Helvetica',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '14px',
@@ -59,7 +61,7 @@ const useStyles = makeStyles({
     },
     '& .MuiOutlinedInput-input': {
       color: '#fff',
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '14px',
@@ -84,33 +86,34 @@ const useStyles = makeStyles({
 
 // For custom slider: color, height, etc...
 const CustomizedSlider = styled(Slider)`
-color: #10E57A;
-height: 4px;
-borderRadius: 2px;
-width: 100%;
-:hover {
-  color: #10B07A;
-}
-zIndex: 9999
+  color: #10E57A;
+  height: 4px;
+  borderRadius: 2px;
+  width: 100%;
+  :hover {
+    color: #10B07A;
+  }
+  zIndex: 9999
 `
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-'& .MuiDialogContent-root': {
-  padding: theme.spacing(2),
-  overflow: 'hidden',
-  height: 'auto'
-},
-'& .MuiDialogActions-root': {
-  padding: theme.spacing(1),
-},
-'& .MuiPaper-root': {
-  background: '#151C2D',
-  border: '1px solid #1B2437',
-  boxSizing: 'border-box',
-  borderRadius: '6px',
-  width: '100%'
-},
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+    overflow: 'hidden',
+    height: 'auto'
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+  '& .MuiPaper-root': {
+    background: '#151C2D',
+    border: '1px solid #1B2437',
+    boxSizing: 'border-box',
+    borderRadius: '6px',
+    width: '100%'
+  },
 }))
 
+// Set BootstrapDialog's Title
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props
 
@@ -134,24 +137,10 @@ const BootstrapDialogTitle = (props) => {
     </DialogTitle>
   )
 }
-
 BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 }
-
-const TitleColor = withStyles({
-  root: {
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontWeight: 900,
-    fontSize: '16px',
-    lineHeight: '24px',
-    background: "-webkit-linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent"
-  }
-})(Typography)
 
 function Creation() {
   // useEffect(() => {
@@ -163,6 +152,7 @@ function Creation() {
   // })
 
   const amount = 24304.9
+
   //State variables
   const [coinStats, setCoinStats] = useState('')
   const [value, setValue] = useState(amount / 2)
@@ -171,6 +161,7 @@ function Creation() {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'))
 
+  // Auth flag
   let auth = localStorage.getItem('auth')
 
   // Open Modal Action
@@ -181,15 +172,15 @@ function Creation() {
     setOpen(false)
   }
 
+  // Select side
   const selectSide = (side) => {
     setCoinStats(side)
   }
 
   // Set slider change value
   const sliderChange = (event, newValue) => {
-      setValue(newValue);
+    setValue(newValue);
   }
-
   const handleOnChange = (e) => {
     console.log(e.target.value)
     setValue(e.target.value)
@@ -205,6 +196,7 @@ function Creation() {
         onClick={handleClickOpen}
         disabled={!auth}
         className="new_flip_btn"
+        startIcon={<AddIcon />}
         style={{
           color: '#fff',
           borderRadius: '4px',
@@ -212,23 +204,27 @@ function Creation() {
           lineHeight: '12px',
           fontWeight: '900',
           background: 'linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
-          fontFamily: 'Lato',
+          fontFamily: 'Helvetica',
           textShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
           width: 'auto',
-          height: '32px',
+          height: '39px',
           padding: '10px 18px',
           marginLeft: '8px',
           opacity: `${auth ? 1 : 0.3}`
         }}
       >
-        Create a new Flip
+        Start New Bet
       </Button>
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
-        sx={{ width: isDesktop ? '463px' : '350px', margin: 'auto', overflowY: 'none', marginTop: isDesktop ? '50px' : '100px' }
-        }
+        sx={{
+          width: isDesktop ? '463px' : '350px',
+          margin: 'auto',
+          overflowY: 'none',
+          marginTop: isDesktop ? '50px' : '100px'
+        }}
       >
         <BootstrapDialogTitle
           id="customized-dialog-title"
@@ -237,10 +233,13 @@ function Creation() {
           <TitleColor> Create a new Flip </TitleColor>
         </BootstrapDialogTitle>
         <DialogContent >
-          <Stack spacing={2} style={{ borderBottom: 'solid 1px #1B2437' }}>
+          <Stack
+            spacing={2}
+            style={{ borderBottom: 'solid 1px #1B2437' }}
+          >
             <Typography sx={{
               color: "#fff",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 700,
               fontSize: '14px',
@@ -265,19 +264,22 @@ function Creation() {
                 padding: '20px',
                 '&:hover': coinStats !== 'heads' ? { background: '#222C42' } : ''
               }}>
-              <Stack direction="row" spacing={2}>
+              <Stack
+                direction="row"
+                spacing={2}
+              >
                 <Stack>
                   <img src="/assets/heads.png" alt="heads" style={{ width: '48px', height: '48px' }} />
                 </Stack>
                 <Stack justifyContent="center">
                   {
                     coinStats && coinStats === 'heads' ?
-                      <CustomGeneralColor> Heads </CustomGeneralColor> :
+                      <TitleColor> Heads </TitleColor> :
                       <CustomPersonalColor> Heads </CustomPersonalColor>
                   }
                   <Typography sx={{
                     color: "#fff",
-                    fontFamily: 'Lato',
+                    fontFamily: 'Helvetica',
                     fontStyle: 'normal',
                     fontWeight: 'bold',
                     fontSize: '16px',
@@ -287,8 +289,14 @@ function Creation() {
                   </Typography>
                 </Stack>
               </Stack>
-              <Stack justifyContent="center">
-                {coinStats && coinStats === 'heads' ? <img src="/assets/icon_star.png" alt="icon" style={{ width: '24px', height: '24px' }} /> : <img src="/assets/icon_star_default.png" alt="icon" style={{ width: '24px', height: '24px' }} />}
+              <Stack
+                justifyContent="center"
+              >
+                {
+                  coinStats && coinStats === 'heads' ?
+                    <img src="/assets/icon_star.png" alt="icon" style={{ width: '24px', height: '24px' }} /> :
+                    <img src="/assets/icon_star_default.png" alt="icon" style={{ width: '24px', height: '24px' }} />
+                }
               </Stack>
             </Stack>
 
@@ -309,19 +317,22 @@ function Creation() {
                 padding: '20px',
                 '&:hover': coinStats !== 'tails' ? { background: '#222C42' } : ''
               }}>
-              <Stack direction="row" spacing={2}>
+              <Stack
+                direction="row"
+                spacing={2}
+              >
                 <Stack>
                   <img src="/assets/tails.png" alt="tails" style={{ width: '48px', height: '48px' }} />
                 </Stack>
                 <Stack justifyContent="center">
                   {
                     coinStats && coinStats === 'tails' ?
-                      <CustomGeneralColor> Tails </CustomGeneralColor> :
+                      <TitleColor> Tails </TitleColor> :
                       <CustomPersonalColor> Tails </CustomPersonalColor>
                   }
                   <Typography sx={{
                     color: "#fff",
-                    fontFamily: 'Lato',
+                    fontFamily: 'Helvetica',
                     fontStyle: 'normal',
                     fontWeight: 'bold',
                     fontSize: '16px',
@@ -336,10 +347,15 @@ function Creation() {
               </Stack>
             </Stack>
           </Stack>
-          <Stack mt={2} spacing={2}>
+
+          {/* Slider: Select Flip amount */}
+          <Stack
+            mt={2}
+            spacing={2}
+          >
             <Typography sx={{
               color: "#fff",
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               fontStyle: 'normal',
               fontWeight: 700,
               fontSize: '14px',
@@ -347,6 +363,7 @@ function Creation() {
             }}>
               Select Flip Amount
             </Typography>
+
             {/* Button list(Max, Min, Current) */}
             <Stack direction="row" spacing={2} justifyContent="space-between" >
               <Button
@@ -360,6 +377,7 @@ function Creation() {
               >
                 $0.00
               </Button>
+
               <TextField
                 value={value}
                 className={classes.root}
@@ -371,6 +389,7 @@ function Creation() {
                 }}
                 onChange={handleOnChange}
               />
+
               <Button
                 variant="contained"
                 sx={{
@@ -383,6 +402,8 @@ function Creation() {
                 {'$' + amount.toFixed(2)}
               </Button>
             </Stack>
+
+            {/* Slider */}
             <Stack style={{ zIndex: 9999 }}>
               <CustomizedSlider
                 className={classes.slider}
@@ -395,6 +416,7 @@ function Creation() {
                 valueLabelDisplay="auto"
               />
             </Stack>
+
             <Stack>
               <Button
                 variant="contained"
@@ -407,7 +429,7 @@ function Creation() {
                   lineHeight: '12px',
                   fontWeight: '900',
                   background: 'linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
-                  fontFamily: 'Lato',
+                  fontFamily: 'Helvetica',
                   textShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                   width: '173px',
                   height: '40px',

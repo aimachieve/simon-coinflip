@@ -1,19 +1,24 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
 import { makeStyles } from '@material-ui/core';
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import { Stack, TextField } from '@mui/material'
+
+import {
+  Stack,
+  TextField,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Iconsx
 import CloseIcon from '@mui/icons-material/Close'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
@@ -32,13 +37,13 @@ function Deposit(props) {
   const useStyles = makeStyles({
     root: {
       color: '#fff',
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontSize: '14px',
       lineHeight: '20px',
       width: '100%',
-      borderRadius:'4px',
+      borderRadius: '4px',
       "& .MuiDialog-paperScrollPaper": {
         background: 'red',
         borderRadius: '4px'
@@ -47,6 +52,7 @@ function Deposit(props) {
   })
   const classes = useStyles()
 
+  // Custom Bootstrap Dialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
       padding: theme.spacing(2),
@@ -86,15 +92,15 @@ function Deposit(props) {
       </DialogTitle>
     )
   }
-
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   }
 
+  // CUstom Styled TitleColor
   const TitleColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '16px',
@@ -110,8 +116,10 @@ function Deposit(props) {
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
-      sx={{ width: isDesktop ? '541px' : '350px', margin: 'auto', marginTop: isDesktop ? '-220px' : '100px' }
-      }
+      sx={{
+        width: isDesktop ? '541px' : '350px',
+        margin: 'auto', marginTop: isDesktop ? '-220px' : '100px'
+      }}
     >
       <BootstrapDialogTitle
         id="customized-dialog-title"
@@ -139,6 +147,8 @@ function Deposit(props) {
             ETH
           </Button> */}
         </Stack>
+
+        {/* Wallet info */}
         <Stack>
           <TextField
             id="bet-amount"
@@ -157,21 +167,27 @@ function Deposit(props) {
             }}
           />
         </Stack>
-        <Stack direction="row" mt={'16px'} spacing={2}>
+
+        {/* Description */}
+        <Stack
+          direction="row"
+          mt={'16px'}
+          spacing={2}>
           <img src='/assets/QR.png' alt="QR Code" style={{
             background: '#FFFFFF',
             borderRadius: '6px',
             width: '55px',
             height: '55px'
           }} />
-          <Typography sx={{
-            fontFamily: 'Lato',
-            fontStyle: 'normal',
-            fontWeight: 'bold',
-            fontSize: '14px',
-            lineHeight: '20px',
-            color: '#8690A7',
-          }}>
+          <Typography
+            sx={{
+              fontFamily: 'Helvetica',
+              fontStyle: 'normal',
+              fontWeight: 'bold',
+              fontSize: '14px',
+              lineHeight: '20px',
+              color: '#8690A7',
+            }}>
             Only send BTC to this address, 1 Confirmation is required until funds are credited.
           </Typography>
         </Stack>

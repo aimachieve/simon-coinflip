@@ -1,16 +1,20 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
 import { styled } from '@mui/material/styles'
-import DialogContent from '@mui/material/DialogContent'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
+
+import {
+  Typography,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent
+} from '@mui/material'
 
 import { useTheme } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 import { withStyles } from '@material-ui/core'
 
+// Icon
 import CloseIcon from '@mui/icons-material/Close'
 
 function Terms(props) {
@@ -62,15 +66,15 @@ function Terms(props) {
       </DialogTitle>
     )
   }
-
   BootstrapDialogTitle.propTypes = {
     children: PropTypes.node,
     onClose: PropTypes.func.isRequired,
   }
 
+  // Custom Typography
   const TitleColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '16px',
@@ -82,7 +86,7 @@ function Terms(props) {
   })(Typography)
 
   return (
-    < BootstrapDialog
+    <BootstrapDialog
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"
       open={open}
@@ -97,7 +101,7 @@ function Terms(props) {
       </BootstrapDialogTitle>
       <DialogContent >
         <Typography sx={{
-          fontFamily: 'Lato',
+          fontFamily: 'Helvetica',
           fontStyle: 'normal',
           fontWeight: 700,
           fontSize: '14px',

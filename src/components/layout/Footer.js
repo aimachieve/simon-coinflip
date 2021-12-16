@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom'
 import { useTheme } from '@material-ui/core/styles'
 import { Button, Typography, useMediaQuery, Stack } from '@mui/material'
 
+// Icons
 import { SiDiscord } from 'react-icons/si';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
+// Modals
 import TermsModal from '../modals/terms'
 import FirnessModal from '../modals/fairness'
 
 const Footer = () => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
+
+  // States
   const [openTerms, setOpenTerms] = React.useState(false)
   const [openFirness, setOpenFairness] = React.useState(false)
-  
+
+  // Control modals
   const handleOpenTerms = () => {
     setOpenTerms(true)
   }
@@ -50,24 +55,26 @@ const Footer = () => {
                   fontStyle: 'normal',
                   fontWeight: 600,
                   lineHeight: '100%',
-                  fontFamily: 'Oxanium',
+                  fontFamily: 'Helvetica',
                   letterSpacing: '0.02em'
                 }}
               >
-                SIMON
+                DEGENE CASINO
                 <span
                   style={{
                     color: '#58627A',
                     fontSize: '14px',
                     fontWeight: 600,
                     lineHeight: '100%',
-                    fontFamily: 'Oxanium',
+                    fontFamily: 'Helvetica',
                   }}
                 >
-                  .P
+                  .COIN FLIP GAME
                 </span>
               </Typography>
             </Link>
+
+            {/* Icons */}
             <Link to='/'>
               <SiDiscord style={{
                 color: '#58627A',
@@ -83,11 +90,13 @@ const Footer = () => {
               }} />
             </Link>
           </Stack>
+
+          {/* Terms of service and Description */}
           <Stack direction="row">
             <Stack justifyContent="flex-start">
               <Button variant="text" onClick={handleOpenTerms} sx={{
                 color: "#58627A",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '12px',
@@ -99,7 +108,7 @@ const Footer = () => {
             <Stack justifyContent="flex-start">
               <Button variant="text" onClick={handleOpenFairness} sx={{
                 color: "#58627A",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '12px',
@@ -108,20 +117,22 @@ const Footer = () => {
                 Fairness
               </Button>
             </Stack>
-            <Stack justifyContent="flex-start" sx={{marginLeft: '40px'}}>
+            <Stack justifyContent="flex-start" sx={{ marginLeft: '40px' }}>
               <Button variant="text" sx={{
                 color: "#58627A",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '12px',
                 lineHeight: '16px',
               }}>
-                Copyright © 2021 Simon.p
+                Copyright © 2021 DEGEN CASINO
               </Button>
             </Stack>
           </Stack >
         </Stack >
+
+        {/* MOdals */}
         <TermsModal
           open={openTerms}
           onClose={handleClose}
@@ -143,7 +154,7 @@ const Footer = () => {
                 fontSize: '24px',
                 fontWeight: 600,
                 lineHeight: '100%',
-                fontFamily: 'Oxanium',
+                fontFamily: 'Helvetica',
                 letterSpacing: '0.02em'
               }}
             >
@@ -154,7 +165,7 @@ const Footer = () => {
                   fontSize: '18px',
                   fontWeight: 600,
                   lineHeight: '100%',
-                  fontFamily: 'Oxanium',
+                  fontFamily: 'Helvetica',
                 }}
               >
                 .GG

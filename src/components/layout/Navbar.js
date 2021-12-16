@@ -1,22 +1,34 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { login, logout, setIsAuthenticated } from '../../actions/auth'
 import { useTheme } from '@material-ui/core/styles'
-import { Button, Typography, useMediaQuery, Stack } from '@mui/material'
 import { withStyles } from '@material-ui/core'
 
+import { Button, Typography, useMediaQuery, Stack, Popover } from '@mui/material'
+import { login, logout, setIsAuthenticated } from '../../actions/auth'
+
+// Wallet Connect
+import {
+  connectWallet,
+  getCurrentWalletConnected,
+} from '../../utils/interact.js'
+
+// Popover
+// import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+
+// Icons
 import { SiDiscord } from 'react-icons/si';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
+// Modals
 import DepositModal from '../modals/deposit'
 import WithdrawModal from '../modals/withdraw'
 
-
+// Custom styled Typographies
 const CustomPersonalColor = withStyles({
   root: {
-    fontFamily: 'Lato',
+    fontFamily: 'Helvetica',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '12px',
@@ -25,10 +37,9 @@ const CustomPersonalColor = withStyles({
     cursor: 'pointer'
   }
 })(Typography)
-
 const DepositColor = withStyles({
   root: {
-    fontFamily: 'Lato',
+    fontFamily: 'Helvetica',
     fontStyle: 'normal',
     fontWeight: 900,
     fontSize: '12px',
@@ -43,30 +54,54 @@ const DepositColor = withStyles({
 const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }) => {
   const theme = useTheme()
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'))
+
+  // States
   const [openDeposit, setOpenDeposit] = React.useState(false)
   const [openWithdraw, setOpenWithdraw] = React.useState(false)
+  const [walletAddress, setWallet] = useState('')
 
-  console.log(isAuthenticated)
-
-  //State variables
-
-  useEffect(() => {
-    window.addEventListener("message", event => {
-      if (event.origin !== process.env.REACT_APP_API_URL) return;
-
-      const { token, user, ok } = event.data;
-      if (ok) {
-        localStorage.setItem("jwtToken", token);
-        console.log(token, user);
-        setIsAuthenticated(user)
-      }
-    });
-  }, [setIsAuthenticated]);
-
-
+  // Get auth flag from localStorage
   let auth = localStorage.getItem('auth')
   let userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
+  useEffect(() => {
+    async function fetchData() {
+      // You can await here
+      const { address } = await getCurrentWalletConnected()
+      setWallet(address)
+      // ...
+    }
+
+    fetchData()
+  }, [])
+
+  // Wallet connect
+  const connectWalletPressed = async () => {
+    //TODO: implement
+    const walletResponse = await connectWallet()
+    setWallet(walletResponse.address)
+
+    addWalletListener()
+
+    if (walletResponse.success) {
+      login(walletResponse.address)
+    }
+  }
+  function addWalletListener() {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length > 0) {
+          setWallet(accounts[0])
+        } else {
+          setWallet('')
+        }
+      })
+    } else {
+    }
+  }
+
+
+  // Control Modals
   const handleOpenDeposit = () => {
     setOpenDeposit(true)
   }
@@ -82,27 +117,35 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
     localStorage.setItem('auth', true)
   }
 
+  // Authenticated Section
   const authLinks = (
     <ul>
-      <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
-        <Stack justifyContent="flex-end" alignItems="flex-end">
+      <Stack
+        direction="row"
+        spacing={2}
+        justifyContent="center"
+        alignItems="center">
+        {/* User name */}
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+        >
           <Typography
             style={{
               color: '#ffffff',
-              fontSize: '12px',
+              fontSize: '15px',
               fontWeight: 'bold',
               fontStyle: 'normal',
               lineHeight: '16px',
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
             }}
           >
             Simon
           </Typography>
-          <CustomPersonalColor onClick={handleOpenWithdraw}>
-            Withdraw
-          </CustomPersonalColor>
         </Stack>
-        {/* <Stack>
+
+        {/* Avartar */}
+        <Stack>
           <img src={userInfo ? userInfo.avatar : ''} alt="avatar" style={{
             width: '34px',
             height: '34px',
@@ -112,7 +155,9 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
             background: 'linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
             borderImageSlice: 1
           }} />
-        </Stack> */}
+        </Stack>
+
+        {/* Button Group */}
         <Stack>
           <Button
             variant="contained"
@@ -124,7 +169,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
               lineHeight: '12px',
               fontWeight: '900',
               background: 'url(/assets/btn_bg.png), linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
-              fontFamily: 'Lato',
+              fontFamily: 'Helvetica',
               textShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
               width: 'auto',
               height: '32px',
@@ -149,7 +194,7 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                 lineHeight: '12px',
                 fontWeight: '900',
                 background: 'url(/assets/btn_bg.png), linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 textShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                 width: 'auto',
                 height: '32px',
@@ -165,27 +210,35 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
     </ul>
   )
 
+  // Unsigned users section
   const guestLinks = (
     <ul>
       <Button
         variant="contained"
-        className="new_flip_btn"
-        style={{
-          color: '#fff',
-          borderRadius: '4px',
-          fontSize: '10px',
-          lineHeight: '12px',
-          fontWeight: '900',
-          background: 'url(/assets/btn_bg.png), linear-gradient(0deg, #10B07A 18.75%, #10E57A 100%)',
-          fontFamily: 'Lato',
-          textShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
-          width: 'auto',
-          height: '32px',
-          padding: '10px 18px'
+        size="large"
+        onClick={connectWalletPressed}
+        sx={{
+          color: 'white',
+          fontSize: '15px',
+          borderRadius: '20px',
+          fontWeight: 'bold',
+          fontFamily: 'Helvetica',
+          background:
+            'linear-gradient(120deg , #dc2424 15%, #4a569d 80%)',
+          '&:hover': {
+            background:
+              'linear-gradient(120deg , #4a569d 15%, #dc2424 80%)'
+          }
         }}
-        onClick={handleLogin}
       >
-        Sign in via NFT
+        {walletAddress.length > 0 ? (
+          'Connected: ' +
+          String(walletAddress).substring(0, 6) +
+          '...' +
+          String(walletAddress).substring(38)
+        ) : (
+          <span>🦊 Connect Wallet</span>
+        )}
       </Button>
     </ul>
   )
@@ -200,8 +253,9 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
           alignItems="center"
           sx={{
             width: '100%',
-            borderBottom: 'solid 1px #1B2437',
-            borderRadius: '1px'
+            borderBottom: 'solid 1px #fffffd',
+            borderRadius: '1px',
+            paddingBottom: '10px'
           }}
         >
           <Stack direction="row" justifyContent="center" alignItems='center'>
@@ -212,34 +266,36 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                   fontSize: '24px',
                   fontWeight: 600,
                   lineHeight: '100%',
-                  fontFamily: 'Oxanium',
+                  fontFamily: 'Helvetica',
                   letterSpacing: '0.02em'
                 }}
               >
-                SIMON
-                <span
-                  style={{
-                    color: '#10E57A',
-                    fontSize: '18px',
-                    fontWeight: 600,
-                    lineHeight: '100%',
-                    fontFamily: 'Oxanium',
-                  }}
-                >
-                  .P
-                </span>
+                DEGEN CASINO
               </Typography>
+              <span
+                style={{
+                  color: '#58627A',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  lineHeight: '100%',
+                  fontFamily: 'Helvetica',
+                }}
+              >
+                COIN FLIP GAME
+              </span>
             </Link>
-            <Link to='/' style={{ marginTop: '8px' }}>
+
+            {/* Icons */}
+            <Link to='/'>
               <SiDiscord style={{
-                color: '#58627A',
+                color: 'white',
                 width: '20px',
                 height: '20px',
               }} />
             </Link>
-            <Link to='/' style={{ marginTop: '8px' }}>
+            <Link to='/'>
               <TwitterIcon style={{
-                color: '#58627A',
+                color: 'white',
                 width: '20px',
                 height: '20px',
               }} />
@@ -253,12 +309,10 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                 justifyContent="center"
                 alignItems="center"
                 sx={{
-                  background: '#151C2D',
-                  border: '1px solid #1B2437',
+                  background: 'rgb(255,255, 255, 0.5)',
                   boxSizing: 'border-box',
                   borderRadius: '8px',
                   padding: '6px 16px',
-                  // marginBottom: '10px'
                 }}>
                 <Typography
                   style={{
@@ -267,16 +321,21 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                     fontSize: '14px',
                     fontWeight: 900,
                     lineHeight: '20px',
-                    fontFamily: 'Lato',
+                    fontFamily: 'Helvetica',
                     letterSpacing: '0.02em'
                   }}
                 >
-                  $ 24,304.90
+                  500 $CHIPS
                 </Typography>
                 <Button onClick={handleOpenDeposit}>
                   <DepositColor>
                     DEPOSIT
                   </DepositColor>
+                </Button>
+                <Button onClick={handleOpenWithdraw}>
+                  <CustomPersonalColor>
+                    Withdraw
+                  </CustomPersonalColor>
                 </Button>
               </Stack> :
               ''
@@ -312,23 +371,23 @@ const Navbar = ({ auth: { isAuthenticated }, login, logout, setIsAuthenticated }
                 fontSize: '24px',
                 fontWeight: 600,
                 lineHeight: '100%',
-                fontFamily: 'Oxanium',
+                fontFamily: 'Helvetica',
                 letterSpacing: '0.02em'
               }}
             >
-              DICED
-              <span
-                style={{
-                  color: '#10E57A',
-                  fontSize: '18px',
-                  fontWeight: 600,
-                  lineHeight: '100%',
-                  fontFamily: 'Oxanium',
-                }}
-              >
-                .GG
-              </span>
+              GENEN CASINO
             </Typography>
+            <span
+              style={{
+                color: '#58627A',
+                fontSize: '14px',
+                fontWeight: 600,
+                lineHeight: '100%',
+                fontFamily: 'Helvetica',
+              }}
+            >
+              COIN FLIP GAME
+            </span>
           </Link>
         </Stack>
         <Fragment>{auth ? authLinks : guestLinks}</Fragment>

@@ -6,6 +6,7 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+
 import { makeStyles, withStyles } from '@material-ui/core'
 import { Stack } from '@mui/material'
 
@@ -32,9 +33,10 @@ const CoinStats = ({ isAuthenticated }) => {
   })
   const classes = useStyles()
 
+  // Custom Typography
   const CustomGeneralColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '12px',
@@ -44,10 +46,9 @@ const CoinStats = ({ isAuthenticated }) => {
       WebkitTextFillColor: "transparent"
     }
   })(Typography)
-
   const CustomPersonalColor = withStyles({
     root: {
-      fontFamily: 'Lato',
+      fontFamily: 'Helvetica',
       fontStyle: 'normal',
       fontWeight: 900,
       fontSize: '12px',
@@ -61,9 +62,9 @@ const CoinStats = ({ isAuthenticated }) => {
   return (
     <Card sx={{ width: '100%', background: '#151C2D80' }}>
       <CardHeader
-        title="Coin Statistics Last  24 Hours"
+        title="Coin Statistics Last 24 Hours"
         titleTypographyProps={{
-          fontFamily: 'Lato',
+          fontFamily: 'Helvetica',
           fontStyle: 'normal',
           fontWeight: 900,
           fontSize: '10px',
@@ -76,17 +77,27 @@ const CoinStats = ({ isAuthenticated }) => {
       />
       <CardContent className={classes.cardcontent}>
         {/* Heads */}
-        <Stack direction="row" spacing={5} justifyContent={'space-between'} sx={{
-          background: coinStats && coinStats === 'heads' ?  'linear-gradient(96.9deg, rgba(18, 25, 40, 0) 0%, #10B07A 149.07%)' : '',
-          boxShadow: '0px 2px 2px 0px #0000001A',
-          borderRadius: '4px',
-          padding: '20px',
-        }}>
-          <Stack direction="row" spacing={2}>
+        <Stack
+          direction="row"
+          spacing={5}
+          justifyContent={'space-between'}
+          sx={{
+            background: coinStats && coinStats === 'heads' ? 'linear-gradient(96.9deg, rgba(18, 25, 40, 0) 0%, #10B07A 149.07%)' : '',
+            boxShadow: '0px 2px 2px 0px #0000001A',
+            borderRadius: '4px',
+            padding: '20px',
+          }}
+        >
+          <Stack
+            direction="row"
+            spacing={2}
+          >
             <Stack>
               <img src="/assets/heads.png" alt="heads" style={{ width: '48px', height: '48px' }} />
             </Stack>
-            <Stack justifyContent="center">
+            <Stack
+              justifyContent="center"
+            >
               {
                 coinStats && coinStats === 'heads' ?
                   <CustomGeneralColor> Heads </CustomGeneralColor> :
@@ -94,7 +105,7 @@ const CoinStats = ({ isAuthenticated }) => {
               }
               <Typography sx={{
                 color: "#fff",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '16px',
@@ -105,18 +116,30 @@ const CoinStats = ({ isAuthenticated }) => {
             </Stack>
           </Stack>
           <Stack justifyContent="center">
-            {coinStats && coinStats === 'heads' ? <img src="/assets/icon_star.png" alt="icon" style={{ width: '24px', height: '24px' }} /> : ''}
+            {
+              coinStats && coinStats === 'heads' ?
+                <img src="/assets/icon_star.png" alt="icon" style={{ width: '24px', height: '24px' }} /> :
+                ''
+            }
           </Stack>
         </Stack>
 
         {/* Tails */}
-        <Stack direction="row" spacing={5} justifyContent={'space-between'} sx={{
-          background: coinStats && coinStats === 'tails' ?  'linear-gradient(96.9deg, rgba(18, 25, 40, 0) 0%, #10B07A 149.07%)' : '',
-          boxShadow: '0px 2px 2px 0px #0000001A',
-          borderRadius: '0px 0px 0px 6px',
-          padding: '20px',
-        }}>
-          <Stack direction="row" spacing={2}>
+        <Stack
+          direction="row"
+          spacing={5}
+          justifyContent={'space-between'}
+          sx={{
+            background: coinStats && coinStats === 'tails' ? 'linear-gradient(96.9deg, rgba(18, 25, 40, 0) 0%, #10B07A 149.07%)' : '',
+            boxShadow: '0px 2px 2px 0px #0000001A',
+            borderRadius: '0px 0px 0px 6px',
+            padding: '20px',
+          }}
+        >
+          <Stack
+            direction="row"
+            spacing={2}
+          >
             <Stack>
               <img src="/assets/tails.png" alt="tails" style={{ width: '48px', height: '48px' }} />
             </Stack>
@@ -128,7 +151,7 @@ const CoinStats = ({ isAuthenticated }) => {
               }
               <Typography sx={{
                 color: "#fff",
-                fontFamily: 'Lato',
+                fontFamily: 'Helvetica',
                 fontStyle: 'normal',
                 fontWeight: 'bold',
                 fontSize: '16px',
@@ -139,7 +162,12 @@ const CoinStats = ({ isAuthenticated }) => {
             </Stack>
           </Stack>
           <Stack justifyContent="center">
-            {coinStats && coinStats === 'tails' ? <img src="/assets/icon_star.png" alt="icon" style={{ width: '24px', height: '24px' }} /> : ''}
+            {
+              coinStats && coinStats === 'tails' ?
+                <img src="/assets/icon_star.png" alt="icon" style={{ width: '24px', height: '24px' }} />
+                :
+                ''
+            }
           </Stack>
         </Stack>
       </CardContent>
